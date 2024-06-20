@@ -12,7 +12,7 @@ import authMiddleware from '../middlewares/auth.js';
 
 
 import {authorizeRoles} from '../middlewares/role.js'
-import multer from "multer"
+
 
 
 
