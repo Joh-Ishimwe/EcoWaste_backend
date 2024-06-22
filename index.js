@@ -6,7 +6,7 @@ import bcrypt from "bcrypt";
 import cors from "cors";
 import mongoose from "mongoose";
 import swaggerUi from "swagger-ui-express";
-import swaggerDocument from "./docs/swagger.json";
+import swaggerDocument from "./docs/swagger.json" assert { type: "json" };
 import configurations from "./configs/index.js";
 import ErrorHandler from "./middlewares/ErrorHandler.js";
 import allRouter from "./routes/user.routes.js";
