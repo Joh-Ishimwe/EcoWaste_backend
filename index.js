@@ -45,10 +45,7 @@ app.post('/api/v1/logout', verifyToken, (req, res) => {
 });
 
 // MongoDB connection
-mongoose.connect(configurations.MONGODB_CONNECTION_STRING, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(configurations.MONGODB_CONNECTION_STRING)
   .then(() => {
     console.log("Connected to MongoDB");
     app.listen(configurations.PORT, () => {
