@@ -1,7 +1,8 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-
+import swaggerUi from 'swagger-ui-express';
+import swagger from './docs/swagger.json' assert {type: "json"}
 
 import express from "express";
 import bcrypt from "bcrypt";
@@ -54,6 +55,7 @@ app.post('/api/v1/logout', verifyToken, (req, res) => {
     res.status(200).json({ message: 'Logged out successfully.' });
 });
 
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swagger));
 
 mongoose.connect(configurations.MONGODB_CONNECTION_STRING)
 .then(() => {

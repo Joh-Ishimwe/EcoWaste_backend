@@ -1,0 +1,359 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "EcoWate APIs Documentation",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:8080/api/v1"
+      },
+      {
+        "url": "https://localhost:8080/api/v1"
+      }
+    ],
+    "tags": [
+      {
+        "name": "Authorization",
+        "description": "Endpoints related to user authorization"
+      },
+      {
+        "name": "Reachout",
+        "description": "Endpoints related to reachout operations"
+      }
+    ],
+    "paths": {
+      "/signup": {
+        "post": {
+          "tags": ["Authorization"],
+          "summary": "Sign up a new user",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserSignUp"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "User created successfully"
+            },
+            "400": {
+              "description": "Bad Request"
+            }
+          },
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ]
+        }
+      },
+      "/verify": {
+        "post": {
+          "tags": ["Authorization"],
+          "summary": "Verify user via OTP",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OtpVerification"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "User verified successfully"
+            },
+            "401": {
+              "description": "Verification Failed"
+            }
+          },
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ]
+        }
+      },
+      "/signin": {
+        "post": {
+          "tags": ["Authorization"],
+          "summary": "Sign in existing user",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserSignIn"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Logged in successfully"
+            },
+            "400": {
+              "description": "Bad Request"
+            }
+          },
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ]
+        }
+      },
+      "/forgotPassword": {
+        "post": {
+          "tags": ["Authorization"],
+          "summary": "Forgot Password",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForgotPassword"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Password reset link sent"
+            },
+            "400": {
+              "description": "Bad Request"
+            }
+          },
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ]
+        }
+      },
+      "/resetPassword": {
+        "post": {
+          "tags": ["Authorization"],
+          "summary": "Reset Password",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResetPassword"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Password reset successful"
+            },
+            "400": {
+              "description": "Bad Request"
+            }
+          },
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ]
+        }
+      },
+      "/createReachout": {
+        "post": {
+          "tags": ["Reachout"],
+          "summary": "Create a new reachout",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reachout"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Reachout created successfully"
+            },
+            "400": {
+              "description": "Bad Request"
+            }
+          }
+        }
+      },
+      "/viewReachout/{id}": {
+        "get": {
+          "tags": ["Reachout"],
+          "summary": "View reachout by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "404": {
+              "description": "Reachout not found"
+            }
+          }
+        }
+      },
+      "/viewallReachouts": {
+        "get": {
+          "tags": ["Reachout"],
+          "summary": "View all reachouts",
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "404": {
+              "description": "Reachout not found"
+            }
+          }
+        }
+      },
+      "/deleteReachout/{id}": {
+        "delete": {
+          "tags": ["Reachout"],
+          "summary": "Delete reachout by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Reachout deleted successfully"
+            },
+            "404": {
+              "description": "Reachout not found"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "UserSignUp": {
+          "type": "object",
+          "properties": {
+            "userName": {
+              "type": "string",
+              "example": "test"
+            },
+            "email": {
+              "type": "string",
+              "example": "test@gmail.com"
+            },
+            "password": {
+              "type": "string",
+              "example": "password"
+            },
+            "role": {
+              "type": "string",
+              "example": ["Customer", "Driver"]
+            }
+          },
+          "required": ["email", "password", "role"]
+        },
+        "OtpVerification": {
+          "type": "object",
+          "properties": {
+            "otp": {
+              "type": "string",
+              "example": "123456"
+            }
+          },
+          "required": ["otp"]
+        },
+        "UserSignIn": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "example": "test@example.com"
+            },
+            "password": {
+              "type": "string",
+              "example": "password123"
+            }
+          },
+          "required": ["email", "password"]
+        },
+        "ForgotPassword": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "example": "test@example.com"
+            }
+          },
+          "required": ["email"]
+        },
+        "ResetPassword": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "example": "test@example.com"
+            },
+            "newPassword": {
+              "type": "string",
+              "example": "newpassword123"
+            },
+            "confirmPassword": {
+              "type": "string",
+              "example": "newpassword123"
+            }
+          },
+          "required": ["email", "newPassword", "confirmPassword"]
+        },
+        "Reachout": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "example": "Cleanup Event"
+            },
+            "description": {
+              "type": "string",
+              "example": "Join us for a community beach cleanup."
+            },
+            "location": {
+              "type": "string",
+              "example": "Santa Monica Beach"
+            },
+            "date": {
+              "type": "string",
+              "example": "2023-08-21"
+            }
+          },
+          "required": ["title", "description", "location", "date"]
+        }
+      }
+    }
+  }
+  
