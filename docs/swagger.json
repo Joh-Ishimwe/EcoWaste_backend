@@ -274,7 +274,7 @@
             },
             "role": {
               "type": "string",
-              "example": ["Customer", "Driver"]
+              "example": ["household", "waste-collector"]
             }
           },
           "required": ["email", "password", "role"]
