@@ -13,15 +13,16 @@ import allRouter from "./routes/user.routes.js";
 
 const app = express();
 
-// const corsOptions = {
-//   origin: [
-//     "https://ecowaste-app-fh1j.onrender.com",
-//     "http://localhost:5502"
-//   ],
-//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//   allowedHeaders: "Content-Type, Authorization",
-//   credentials: true,
-// };
+// CORS Options
+const corsOptions = {
+  origin: [
+    "https://ecowaste-app-fh1j.onrender.com",
+    "http://localhost:5502"
+  ],
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: "Content-Type, Authorization",
+  credentials: true,
+};
 
 app.use(cors(corsOptions));
 app.use(express.json());
