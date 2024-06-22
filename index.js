@@ -13,18 +13,8 @@ import allRouter from "./routes/user.routes.js";
 
 const app = express();
 
-// CORS Options
-const corsOptions = {
-  origin: [
-    "https://ecowaste-app-fh1j.onrender.com",
-    "http://localhost:5502"
-  ],
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  allowedHeaders: "Content-Type, Authorization",
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
+// Default CORS settings
+app.use(cors());
 app.use(express.json());
 
 // API routes
